@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>asillaV | Automation & Data Analysis</title>
-  <meta name="description" content="Automation & data analysis for industry. CSV & signal tooling, Python, dashboards and reporting.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>asillaV — Automation & Data Analysis</title>
+  <meta name="description" content="Lean automation and data analysis for industry. CSV & signal tooling, Python, dashboards, and reporting.">
   <meta name="theme-color" content="#0e0e0e">
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -13,59 +13,122 @@
     <img src="assets/logo.png" alt="asillaV logo" class="logo" />
     <h1>Francesco Vallisa</h1>
     <p class="tag">Automation & Data Analysis</p>
-    <p class="lead">I build lean <strong>data tools</strong> and <strong>automations</strong> that turn messy CSVs & signals into clear, actionable insights.</p>
+    <p class="lead">
+      I build lean <strong>data tools</strong> and <strong>automations</strong> that turn messy CSVs & signals
+      into clear, actionable insights — fast, reliable, no fluff.
+    </p>
     <div class="cta">
-      <a class="btn primary" href="mailto:francesco.vallisa@gmail.com">Hire me</a>
-      <a class="btn" href="https://github.com/asillav" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn primary" href="mailto:vallisa97@gmail.com">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/francesco-vallisa-64669b198?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+
+    <div class="highlights">
+      <div class="hi">
+        <h3>⚙️ Automation</h3>
+        <p>Python scripts & pipelines that save hours every week.</p>
+      </div>
+      <div class="hi">
+        <h3>📈 Data clarity</h3>
+        <p>From raw CSVs to plots, KPIs and concise reports.</p>
+      </div>
+      <div class="hi">
+        <h3>🏭 Industrial mindset</h3>
+        <p>Pragmatic solutions, stable logs, clean interfaces.</p>
+      </div>
     </div>
   </header>
 
   <main class="container">
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        I’m a hands-on engineer who turns raw data and manual workflows into
+        lean automations and clear insights. I started as a <strong>Field Engineer (ATM systems)</strong>,
+        and today I work as a <strong>Product/System Engineer</strong> building data tools and
+        diagnostics for industrial environments.
+      </p>
+
+      <details>
+        <summary>More about me</summary>
+        <div class="about-grid">
+          <div>
+            <h3>Before</h3>
+            <ul class="mini">
+              <li>Field Engineer on ATM machines: installation, troubleshooting, SLA-driven support.</li>
+              <li>Strong customer focus, fast root-cause analysis, reliable fixes.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Now</h3>
+            <ul class="mini">
+              <li>Product/System Engineer in industrial data & diagnostics.</li>
+              <li>Python automations, CSV/signal tooling, reporting & dashboards.</li>
+              <li>Pragmatic mindset: stability, logs, clean UX (TUI & Web).</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Next</h3>
+            <ul class="mini">
+              <li>Go <strong>independent</strong>: short gigs, prototypes, PoCs, retainers.</li>
+              <li>Help teams save time with automation and actionable data.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- SERVICES -->
     <section id="services">
       <h2>What I do</h2>
       <ul class="pill-list">
         <li>Industrial data parsing (CSV, logs, signals)</li>
-        <li>Automation scripts & pipelines (Python)</li>
+        <li>Automation scripts & ETL pipelines (Python)</li>
         <li>Interactive plots & dashboards (Plotly, Streamlit)</li>
-        <li>Reports & KPIs (CSV/HTML/Markdown)</li>
+        <li>Reports & KPIs (CSV / HTML / Markdown)</li>
       </ul>
     </section>
 
+    <!-- WORK -->
     <section id="work">
       <h2>Selected work</h2>
-
       <article class="card">
         <div class="card-body">
-          <h3>CSV Analyzer <span class="badge">Open-source</span></h3>
+          <h3>CSV Analyzer <span class="badge">Demo</span></h3>
           <p>
-            A compact tool to load large CSV files, auto-detect encoding & delimiter, 
-            plot <em>overlay</em> or <em>separate</em> series with axis limits, and export quick statistics.
-            Comes with a Textual TUI and a Streamlit web UI.
+            Load large CSV files, auto-detect encoding & delimiter, plot series
+            (overlay or separate) with axis limits, and export quick statistics.
+            Includes a terminal <em>TUI</em> and a <em>Streamlit</em> web UI.
           </p>
           <ul class="mini">
-            <li>Auto encoding/header detection</li>
+            <li>Smart encoding/header detection</li>
             <li>Plotly charts (overlay / per-series)</li>
-            <li>Report generator (CSV / MD / HTML)</li>
-            <li>Clean logging & modular core</li>
+            <li>One-click report (CSV / MD / HTML)</li>
+            <li>Modular core + structured logging</li>
           </ul>
           <div class="actions">
-            <a class="btn primary" href="https://github.com/asillav/csv-analyzer" target="_blank" rel="noopener">View repository</a>
+            <a class="btn primary" href="mailto:vallisa97@gmail.com?subject=CSV%20Analyzer%20Demo%20Request">Request a demo</a>
           </div>
         </div>
       </article>
     </section>
 
-    <section id="stack">
-      <h2>Tech stack</h2>
-      <div class="stack">
-        <span>Python</span><span>Pandas</span><span>NumPy</span><span>Plotly</span><span>Streamlit</span><span>Textual</span><span>Git</span>
-      </div>
+    <!-- PROCESS -->
+    <section id="process">
+      <h2>How I work</h2>
+      <ol class="steps">
+        <li><strong>Discover</strong> — clarify inputs, constraints, and outputs.</li>
+        <li><strong>Prototype</strong> — deliver a lean, testable version quickly.</li>
+        <li><strong>Deliver</strong> — refine, document, and automate.</li>
+      </ol>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
       <h2>Contact</h2>
-      <p>Let’s talk about your data: <a href="mailto:francesco.vallisa@gmail.com">francesco.vallisa@gmail.com</a> · 
-      <a href="https://www.linkedin.com/in/francescovallisa" target="_blank" rel="noopener">LinkedIn</a></p>
+      <p>Let’s talk about your data:</p>
+      <p><a href="mailto:vallisa97@gmail.com">vallisa97@gmail.com</a> · 
+         <a href="https://www.linkedin.com/in/francesco-vallisa-64669b198?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener">LinkedIn</a></p>
     </section>
   </main>
 
