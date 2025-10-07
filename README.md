@@ -1,17 +1,16 @@
-# asillav.github.io — Portfolio (EN)
+# asillav.github.io — Portfolio (GIF-only demo)
 
-This repository hosts my GitHub Pages site: **Automation & Data Analysis** — tools, automations and open‑source work.
+This package is ready for GitHub Pages. It uses a GIF-only demo inside the project card.
 
-## Local structure
-```
-.
-├── index.html
-├── style.css
-└── assets/
-    └── logo.png  # add your logo here (PNG, transparent background)
-```
+## Upload steps
+1. Create a public repo named `asillav.github.io`.
+2. Upload these files at the repo root.
+3. Put your assets in `assets/`:
+   - `logo.png` (transparent background)
+   - `csv-analyzer.gif` (your project demo)
+4. Enable Pages: Settings → Pages → Branch `main`, Folder `/ (root)`.
+5. Visit `https://asillav.github.io`.
 
-## Publish
-- Settings → Pages → Source: `Deploy from a branch`
-- Branch: `main` — Folder: `/ (root)` → Save
-- Live at: `https://asillav.github.io`
+## Notes
+- Keep the GIF under ~8–10 MB for faster load.
+- If later you want an MP4 preview, replace the media block in `index.html` with a `<video>` snippet.
