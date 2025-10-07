@@ -4,56 +4,73 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>asillaV | Automation & Data Analysis</title>
+  <meta name="description" content="Automation & data analysis for industry. CSV & signal tooling, Python, dashboards and reporting.">
+  <meta name="theme-color" content="#0e0e0e">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <header>
+  <header class="hero">
     <img src="assets/logo.png" alt="asillaV logo" class="logo" />
     <h1>Francesco Vallisa</h1>
-    <h2>Automation & Data Analysis Engineer</h2>
+    <p class="tag">Automation & Data Analysis</p>
+    <p class="lead">I build lean <strong>data tools</strong> and <strong>automations</strong> that turn messy CSVs & signals into clear, actionable insights.</p>
+    <div class="cta">
+      <a class="btn primary" href="mailto:francesco.vallisa@gmail.com">Hire me</a>
+      <a class="btn" href="https://github.com/asillav" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </header>
 
-  <main>
-    <section id="about">
-      <h3>About Me</h3>
-      <p>
-        I'm a system engineer and Python developer with a strong background in 
-        <strong>industrial automation, data analysis, and signal processing</strong>.
-        <br><br>
-        <strong>asillaV</strong> is my personal brand and workspace — a place where 
-        I design tools, prototypes, and software that turn complex data into 
-        clear, actionable insights.
-      </p>
+  <main class="container">
+    <section id="services">
+      <h2>What I do</h2>
+      <ul class="pill-list">
+        <li>Industrial data parsing (CSV, logs, signals)</li>
+        <li>Automation scripts & pipelines (Python)</li>
+        <li>Interactive plots & dashboards (Plotly, Streamlit)</li>
+        <li>Reports & KPIs (CSV/HTML/Markdown)</li>
+      </ul>
     </section>
 
-    <section id="projects">
-      <h3>Projects</h3>
+    <section id="work">
+      <h2>Selected work</h2>
 
-      <article>
-        <h4>📊 CSV Analyzer</h4>
-        <p>
-          Open-source application for loading and analyzing CSV files with 
-          both a <em>Textual TUI</em> and a <em>Streamlit Web UI</em>. 
-          It includes automatic encoding detection, Plotly charts, 
-          and statistical report generation.
-        </p>
-        <a href="https://github.com/asillav/csv-analyzer" target="_blank">→ View the repository</a>
+      <article class="card">
+        <div class="card-body">
+          <h3>CSV Analyzer <span class="badge">Open-source</span></h3>
+          <p>
+            A compact tool to load large CSV files, auto-detect encoding & delimiter, 
+            plot <em>overlay</em> or <em>separate</em> series with axis limits, and export quick statistics.
+            Comes with a Textual TUI and a Streamlit web UI.
+          </p>
+          <ul class="mini">
+            <li>Auto encoding/header detection</li>
+            <li>Plotly charts (overlay / per-series)</li>
+            <li>Report generator (CSV / MD / HTML)</li>
+            <li>Clean logging & modular core</li>
+          </ul>
+          <div class="actions">
+            <a class="btn primary" href="https://github.com/asillav/csv-analyzer" target="_blank" rel="noopener">View repository</a>
+          </div>
+        </div>
       </article>
+    </section>
 
-      <!-- Future projects go here -->
+    <section id="stack">
+      <h2>Tech stack</h2>
+      <div class="stack">
+        <span>Python</span><span>Pandas</span><span>NumPy</span><span>Plotly</span><span>Streamlit</span><span>Textual</span><span>Git</span>
+      </div>
     </section>
 
     <section id="contact">
-      <h3>Contact</h3>
-      <p>📧 <a href="vallisa97@gmail.com">vallisa97@gmail.com</a></p>
-      <p>🔗 <a href="https://www.linkedin.com/in/francesco-vallisa-64669b198?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a></p>
+      <h2>Contact</h2>
+      <p>Let’s talk about your data: <a href="mailto:francesco.vallisa@gmail.com">francesco.vallisa@gmail.com</a> · 
+      <a href="https://www.linkedin.com/in/francescovallisa" target="_blank" rel="noopener">LinkedIn</a></p>
     </section>
   </main>
 
-  <footer>
+  <footer class="foot">
     <p>© 2025 asillaV — Automation & Data Analysis</p>
   </footer>
-
 </body>
 </html>
