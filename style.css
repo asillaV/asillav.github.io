@@ -50,14 +50,14 @@ section{margin:2rem 0} h2{font-size:1.25rem; margin:.25rem 0 1rem}
 }
 
 /* CARD */
-.card{border:1px solid var(--border); background:var(--card); border-radius:14px; overflow:hidden}
-.card-body{padding:1rem 1rem 1.1rem}
+.card{border:1px solid var(--border); background:var(--card); border-radius:14px; overflow:hidden; display:flex; flex-direction:column}
+.card-body{padding:1rem 1rem 1.1rem; display:flex; flex-direction:column; flex:1}
 .badge{
   font-size:.8rem; padding:.16rem .5rem; border:1px solid var(--border); border-radius:999px;
   color:#bfe4ff; background:rgba(63,169,245,.08); vertical-align:middle;
 }
 .mini{margin:.6rem 0 .9rem; padding-left:1rem} .mini li{margin:.18rem 0; color:#d8d8d8}
-.actions{display:flex; gap:.6rem; flex-wrap:wrap}
+.actions{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:auto; padding-top:.6rem}
 .work-grid{
   display:grid;
   gap:1rem;
