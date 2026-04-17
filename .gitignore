@@ -1,0 +1,17 @@
+# AI assistant config files
+AGENTS.md
+CLAUDE.md
+
+# Screenshots / temp assets
+assets/screen_index.png
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Node (if ever used locally)
+node_modules/
