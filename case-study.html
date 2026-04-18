@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSV Analyzer — Case Study | Francesco Vallisa</title>
+  <meta name="description" content="Come ho costruito un tool che riduce l'analisi di CSV industriali da ore a minuti, senza codice. Case study reale con contesto, scelte progettuali, limiti e valore prodotto.">
+  <meta name="theme-color" content="#0e0e0e">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="CSV Analyzer — Case Study | Francesco Vallisa">
+  <meta property="og:description" content="Come ho costruito un tool che riduce l'analisi di CSV industriali da ore a minuti, senza codice. Case study reale con contesto, scelte progettuali, limiti e valore prodotto.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://asillav.github.io/case-study.html">
+  <meta property="og:image" content="https://asillav.github.io/assets/logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSV Analyzer — Case Study | Francesco Vallisa">
+  <meta name="twitter:description" content="Come ho costruito un tool che riduce l'analisi di CSV industriali da ore a minuti, senza codice. Case study reale con contesto, scelte progettuali, limiti e valore prodotto.">
+  <meta name="twitter:image" content="https://asillav.github.io/assets/logo.png">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Case study specific layout */
+    .cs-header {
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1rem 2.2rem;
+      background: linear-gradient(180deg, rgba(63,169,245,0.06), transparent 60%);
+    }
+
+    .cs-nav {
+      max-width: 760px;
+      margin: 0 auto 1.6rem;
+    }
+
+    .cs-nav a {
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .cs-nav a:hover {
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .cs-title {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .cs-title h1 {
+      font-size: 2rem;
+      margin: 0 0 .4rem;
+    }
+
+    .cs-subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 .8rem;
+    }
+
+    .cs-meta {
+      font-size: .85rem;
+      color: var(--muted);
+      margin: 0 0 1.2rem;
+      letter-spacing: .02em;
+    }
+
+    .cs-cta {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    /* Body layout */
+    .cs-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .cs-body section {
+      margin: 2.4rem 0;
+    }
+
+    .cs-body h2 {
+      font-size: 1.2rem;
+      margin: 0 0 .9rem;
+      color: var(--fg);
+    }
+
+    .cs-body h3 {
+      font-size: 1rem;
+      margin: 1.2rem 0 .5rem;
+      color: var(--fg);
+    }
+
+    .cs-body p {
+      margin: .5rem 0 .8rem;
+      color: #d8d8d8;
+    }
+
+    .cs-body ul, .cs-body ol {
+      margin: .4rem 0 .8rem;
+      padding-left: 1.3rem;
+      color: #d8d8d8;
+    }
+
+    .cs-body li {
+      margin: .3rem 0;
+    }
+
+    /* Workflow steps */
+    .workflow {
+      list-style: none;
+      padding: 0;
+      margin: .8rem 0;
+      position: relative;
+    }
+
+    .workflow::before {
+      content: '';
+      position: absolute;
+      left: 18px;
+      top: 28px;
+      bottom: 28px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .workflow-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: .65rem 0;
+      position: relative;
+    }
+
+    .workflow-num {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(63,169,245,.12);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: .95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .workflow-content {
+      padding-top: .4rem;
+    }
+
+    .workflow-content strong {
+      display: block;
+      color: var(--fg);
+      font-size: .95rem;
+    }
+
+    .workflow-content span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    /* Callout */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: rgba(63,169,245,.05);
+      border-radius: 0 10px 10px 0;
+      padding: 1.1rem 1.3rem;
+      margin: .6rem 0 1rem;
+    }
+
+    .callout-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--fg);
+      margin: 0 0 .6rem;
+    }
+
+    .callout p {
+      margin: 0 0 .6rem;
+    }
+
+    .callout ul {
+      margin: .3rem 0 0;
+    }
+
+    /* Warning list */
+    .warn-list {
+      list-style: none;
+      padding: 0;
+      margin: .4rem 0 .8rem;
+      color: #d8d8d8;
+    }
+
+    .warn-list li {
+      padding: .25rem 0 .25rem 1.8rem;
+      position: relative;
+      margin: .3rem 0;
+    }
+
+    .warn-list li::before {
+      content: '⚠';
+      position: absolute;
+      left: 0;
+      top: .25rem;
+      font-size: .85rem;
+      color: #e8b64a;
+    }
+
+    /* Evolution list */
+    .evol-list {
+      list-style: none;
+      padding: 0;
+      margin: .4rem 0 .8rem;
+      counter-reset: evol;
+    }
+
+    .evol-list li {
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+      padding: .5rem 0;
+      color: #d8d8d8;
+      counter-increment: evol;
+    }
+
+    .evol-list li::before {
+      content: counter(evol);
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(63,169,245,.12);
+      border: 1px solid rgba(63,169,245,.4);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: .82rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: .1rem;
+    }
+
+    /* Note section */
+    .cs-note {
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+      padding-top: 1.4rem;
+    }
+
+    .cs-note p {
+      font-size: .875rem;
+      color: var(--muted);
+      margin: .3rem 0;
+    }
+
+    .cs-note .note-label {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #555;
+      margin-bottom: .4rem;
+    }
+
+    /* Footer back link */
+    .cs-footer-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .9rem;
+      margin-bottom: .5rem;
+    }
+
+    @media (max-width: 720px) {
+      .cs-title h1 { font-size: 1.55rem; }
+      .workflow::before { left: 15px; }
+      .workflow-num { width: 32px; height: 32px; font-size: .85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="cs-header">
+    <div class="cs-nav">
+      <a href="index.html">← Portfolio</a>
+    </div>
+    <div class="cs-title">
+      <h1>CSV Analyzer</h1>
+      <p class="cs-subtitle">Case study — come un tool ha eliminato la frizione nell'analisi di dati industriali</p>
+      <p class="cs-meta">Industria · Diagnostica · Python · Signal Processing</p>
+      <div class="cs-cta">
+        <a class="btn primary" href="https://asillav-csv-analyzer.streamlit.app" target="_blank" rel="noopener">Prova la demo</a>
+        <a class="btn" href="https://github.com/asillaV/csv-analyzer" target="_blank" rel="noopener">Repository</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="cs-body">
+
+    <section id="il-problema">
+      <h2>1. Il problema</h2>
+      <p>
+        Nel lavoro quotidiano con sistemi di acquisizione dati, i file prodotti dai sensori — accelerometri,
+        celle di carico, potenziometri — arrivano in formato binario e vengono convertiti in CSV tramite
+        software dedicati.
+      </p>
+      <p>
+        Il problema non è il formato CSV in sé. Il problema è che <strong>ogni commessa può avere una struttura
+        diversa</strong>: header diversi, nomi colonna diversi, configurazioni diverse, anche quando i sensori
+        di base sono gli stessi. Ogni cliente introduce variazioni. Ogni progetto ha le sue specifiche.
+      </p>
+      <p>Questo creava due situazioni ricorrenti:</p>
+      <ul>
+        <li><strong>Chi sapeva programmare</strong> (Python, LabVIEW) doveva comunque riscrivere o adattare
+        gli script di analisi per ogni nuova commessa. Stesso dominio, stessa logica, codice nuovo ogni volta.</li>
+        <li><strong>Chi non sapeva programmare</strong> usava Excel. Ma Excel non è pensato per dataset acquisiti
+        a 1 kHz o più: limiti sul numero di righe, prestazioni inadeguate su file grandi, impossibilità di fare
+        analisi tecniche complete come FFT o filtraggio.</li>
+      </ul>
+      <p>
+        Il risultato pratico: per ottenere anche solo un plot di un segnale, serviva quasi sempre o scrivere
+        codice o arrangiarsi con uno strumento inadeguato. Attività ripetitive, dipendenza dagli sviluppatori,
+        rallentamenti nella fase di analisi e test.
+      </p>
+      <p>
+        <strong>Mancava uno strumento abbastanza flessibile da adattarsi a dataset strutturalmente diversi,
+        senza richiedere ogni volta nuova programmazione.</strong>
+      </p>
+    </section>
+
+    <section id="l-obiettivo">
+      <h2>2. L'obiettivo</h2>
+      <p>
+        L'obiettivo era costruire uno strumento che un ingegnere tecnico — non necessariamente un programmatore —
+        potesse usare immediatamente su qualsiasi CSV, indipendentemente da come era strutturato.
+      </p>
+      <p>I requisiti concreti erano:</p>
+      <ul>
+        <li>Leggere CSV eterogenei senza configurazione manuale della struttura</li>
+        <li>Offrire le funzioni di analisi più comuni già integrate (visualizzazione, FFT, filtri, statistiche)</li>
+        <li>Essere usabile anche da chi non scrive codice</li>
+        <li>Poter essere distribuito senza richiedere installazioni complesse o accesso al codice sorgente</li>
+        <li>Essere abbastanza modulare da poter essere esteso o adattato nel tempo</li>
+      </ul>
+      <p>
+        Non era un progetto pensato per sostituire MATLAB o strumenti specialistici. Era pensato per
+        <strong>eliminare la frizione iniziale</strong>: quella fase in cui, prima di fare qualsiasi analisi,
+        bisogna costruire l'ambiente di lavoro da zero.
+      </p>
+    </section>
+
+    <section id="la-soluzione">
+      <h2>3. La soluzione</h2>
+      <p>
+        Analizzatore CSV è una dashboard multi-piattaforma per l'analisi di segnali in file CSV.
+      </p>
+      <p>
+        Permette di caricare un file CSV — qualunque ne sia la struttura — e passare direttamente all'analisi:
+        visualizzazione dei segnali, filtraggio, FFT, report statistici, export dei risultati. Senza scrivere
+        una riga di codice.
+      </p>
+      <p>
+        Il software rileva automaticamente la struttura del file (encoding, delimitatore, header, formato numerico)
+        e gestisce i formati più comuni, inclusi quelli con numeri in locale italiana, simboli di valuta,
+        separatori variabili. Una volta caricato il dataset, l'utente sceglie gli assi, seleziona i segnali da
+        analizzare e procede con le operazioni che gli servono.
+      </p>
+      <p>È disponibile in tre interfacce:</p>
+      <ul>
+        <li><strong>Web app</strong> (Streamlit) — la più completa, distribuibile senza installazione</li>
+        <li><strong>Desktop</strong> (Tkinter) — per uso locale classico</li>
+        <li><strong>TUI</strong> (Textual) — per ambienti terminale</li>
+      </ul>
+    </section>
+
+    <section id="le-scelte-progettuali">
+      <h2>4. Le scelte progettuali</h2>
+
+      <h3>Architettura modulare: core separato dall'UI</h3>
+      <p>
+        Sin dall'inizio, la logica di elaborazione dati è stata separata dalle interfacce utente. La ragione
+        era pratica: non era chiaro quale forma avrebbe preso il progetto, e mantenere il core indipendente
+        avrebbe permesso di usarlo in contesti diversi — notebook Jupyter, script, app desktop, web app —
+        senza riscrivere la logica di analisi.
+      </p>
+      <p>
+        Questa scelta ha reso possibile aggiungere la web app senza toccare il motore di elaborazione. Le tre
+        interfacce condividono lo stesso backend.
+      </p>
+
+      <h3>Web app come soluzione al problema di distribuzione</h3>
+      <p>
+        Le interfacce TUI e desktop erano nate per uso personale. La svolta verso la web app è arrivata quando
+        si è capito che lo strumento era utile anche ai colleghi, ma distribuire il codice sorgente o gestire
+        installazioni Python su macchine non configurate era impraticabile.
+      </p>
+      <p>
+        La web app ha risolto entrambi i problemi: nessun codice condiviso, nessuna installazione, soglia di
+        accesso minima.
+      </p>
+
+      <h3>Preset: configurazioni riusabili</h3>
+      <p>
+        Durante l'uso quotidiano emergeva un pattern: le stesse impostazioni venivano reinserite manualmente
+        ogni volta. FFT su dati a 1 kHz, filtro passa-basso a 20 Hz di quarto ordine — sempre le stesse
+        combinazioni. Il sistema di preset nasce per eliminare questa ripetizione e per permettere a ogni utente
+        di salvare le configurazioni che usa più spesso. È ancora in fase di consolidamento, ma risponde a
+        un'esigenza reale.
+      </p>
+
+      <h3>Quality check non bloccanti</h3>
+      <p>
+        Se il software deve adattarsi a CSV di provenienza eterogenea, deve anche aiutare a capire quando i
+        dati hanno problemi. I quality check (monotonicità dell'asse X, gap nel campionamento, spike anomali)
+        segnalano potenziali criticità senza interrompere il flusso di lavoro. L'utente riceve un avviso, ma
+        può comunque procedere con l'analisi. Questo è utile soprattutto quando il problema non è nell'analisi,
+        ma nel CSV stesso — ad esempio per errori di estrazione dal sistema originario.
+      </p>
+    </section>
+
+    <section id="il-workflow">
+      <h2>5. Il workflow</h2>
+      <p>Il flusso tipico di una sessione di analisi:</p>
+      <ol class="workflow" role="list">
+        <li class="workflow-step">
+          <div class="workflow-num" aria-hidden="true">1</div>
+          <div class="workflow-content">
+            <strong>Caricamento</strong>
+            <span>Drag and drop del CSV nell'interfaccia web, o selezione file nel desktop.</span>
+          </div>
+        </li>
+        <li class="workflow-step">
+          <div class="workflow-num" aria-hidden="true">2</div>
+          <div class="workflow-content">
+            <strong>Lettura automatica</strong>
+            <span>Il software rileva encoding, delimitatore, header, formato numerico.</span>
+          </div>
+        </li>
+        <li class="workflow-step">
+          <div class="workflow-num" aria-hidden="true">3</div>
+          <div class="workflow-content">
+            <strong>Quality check</strong>
+            <span>Eventuali avvisi su anomalie nei dati (non bloccanti).</span>
+          </div>
+        </li>
+        <li class="workflow-step">
+          <div class="workflow-num" aria-hidden="true">4</div>
+          <div class="workflow-content">
+            <strong>Selezione assi</strong>
+            <span>L'utente sceglie l'asse X (temporale o numerico) e i segnali Y da visualizzare.</span>
+          </div>
+        </li>
+        <li class="workflow-step">
+          <div class="workflow-num" aria-hidden="true">5</div>
+          <div class="workflow-content">
+            <strong>Visualizzazione</strong>
+            <span>Plot sovrapposti o separati, interattivi.</span>
+          </div>
+        </li>
+        <li class="workflow-step">
+          <div class="workflow-num" aria-hidden="true">6</div>
+          <div class="workflow-content">
+            <strong>Analisi</strong>
+            <span>FFT, filtri (Moving Average, Butterworth LP/HP/BP), statistiche per sezione.</span>
+          </div>
+        </li>
+        <li class="workflow-step">
+          <div class="workflow-num" aria-hidden="true">7</div>
+          <div class="workflow-content">
+            <strong>Export</strong>
+            <span>Plot scaricabili, report HTML interattivi, report visivi in PNG/PDF.</span>
+          </div>
+        </li>
+      </ol>
+      <p>
+        Il valore del flusso è nella fase 1→5: dal file grezzo all'analisi visiva in pochi passaggi,
+        senza codice.
+      </p>
+    </section>
+
+    <section id="il-valore-prodotto">
+      <h2>6. Il valore prodotto</h2>
+
+      <div class="callout">
+        <p class="callout-title">Analisi in tempo reale durante una call con un cliente</p>
+        <p>
+          Un caso concreto: durante una call tecnica, un cliente sosteneva che il sistema avesse problemi nel
+          calcolo delle accelerazioni, perché la media dei valori non risultava zero. Il cliente aveva fornito
+          un CSV custom — struttura non standard, mai vista prima.
+        </p>
+        <p>In tempo reale, senza preparazione preventiva:</p>
+        <ul>
+          <li>il file è stato caricato e letto automaticamente</li>
+          <li>è stata eseguita una FFT per verificare il comportamento del segnale</li>
+          <li>i dati delle celle di carico sono stati correlati con i dati sull'asse spaziale</li>
+          <li>è stato possibile dimostrare che il problema non era nei filtraggi, ma nella posizione errata
+          dello strumento in esercizio</li>
+        </ul>
+        <p>
+          Senza questo strumento, la stessa analisi avrebbe richiesto di interrompere la call, sviluppare
+          uno script ad hoc, riprocessare i dati e riprendere il confronto in un secondo momento.
+        </p>
+      </div>
+
+      <h3>Riduzione del tempo di analisi</h3>
+      <p>
+        Attività che in precedenza richiedevano anche alcune ore — capire la struttura del CSV, scrivere o
+        adattare codice, generare i plot — oggi si completano in circa 15 minuti, salvo analisi molto specifiche
+        o personalizzate.
+      </p>
+
+      <h3>Abbassamento della barriera tecnica</h3>
+      <p>
+        Il software è usato anche da colleghi non programmatori e da figure junior in onboarding. L'accesso
+        alla web app permette di iniziare a esplorare i dati immediatamente, senza setup, rimandando lo
+        sviluppo di codice solo alle analisi che lo richiedono davvero.
+      </p>
+
+      <h3>Analisi in laboratorio più rapide</h3>
+      <p>
+        Durante test su nuovi dispositivi, il software ha permesso di ottenere risultati completi più
+        rapidamente rispetto allo sviluppo di uno script MATLAB iniziale, perché le funzionalità comuni
+        erano già integrate e pronte all'uso.
+      </p>
+    </section>
+
+    <section id="i-limiti-attuali">
+      <h2>7. I limiti attuali</h2>
+      <p>Questi sono i limiti reali che un utente deve conoscere prima di adottare il software:</p>
+      <ul class="warn-list">
+        <li><strong>Un solo CSV alla volta</strong>: non è possibile caricare e confrontare più file contemporaneamente nella stessa sessione</li>
+        <li><strong>Nessuna operazione tra dataset</strong>: non si possono combinare, sottrarre o trasformare serie provenienti da file diversi</li>
+        <li><strong>Limite di upload sulla versione cloud</strong>: sulla versione Streamlit Cloud, il limite di upload è circa 200 MB per file</li>
+        <li><strong>Prima lettura lenta su file grandi</strong>: la fase di caricamento e raffinazione può richiedere tempo su dataset pesanti; una volta completata, l'elaborazione è veloce</li>
+        <li><strong>Preset ancora sperimentali</strong>: il sistema funziona, ma ha ancora margini di stabilizzazione</li>
+      </ul>
+      <p>
+        Per analisi che richiedono confronto tra commesse diverse o operazioni complesse tra serie, rimane
+        necessario scrivere codice dedicato.
+      </p>
+    </section>
+
+    <section id="evoluzioni-possibili">
+      <h2>8. Evoluzioni possibili</h2>
+      <p>Le priorità di sviluppo emerse dall'uso reale:</p>
+      <ol class="evol-list">
+        <li><strong>Velocità della prima lettura</strong> — la fase di caricamento e raffinazione è il collo di bottiglia principale; c'è margine significativo di miglioramento</li>
+        <li><strong>Lettura di più CSV contemporaneamente</strong> — permetterebbe di confrontare dataset diversi nello stesso flusso di lavoro, che è uno dei casi d'uso più richiesti</li>
+        <li><strong>Operazioni tra serie</strong> — combinare, confrontare o trasformare segnali direttamente dentro il tool, senza passare a codice esterno</li>
+      </ol>
+      <p>
+        In parallelo: stabilizzazione del sistema di preset e risoluzione di bug noti nel comportamento del
+        fill/fit su alcuni formati CSV particolari.
+      </p>
+    </section>
+
+    <div class="cs-note">
+      <p class="note-label">Note</p>
+      <p>
+        Questo case study è scritto sulla base dell'esperienza reale di sviluppo e utilizzo del software.
+        Non contiene metriche inventate né benefici ipotetici. Le situazioni descritte (call con cliente,
+        test in laboratorio, onboarding junior) sono casi d'uso effettivi.
+      </p>
+      <p>
+        Il progetto è open source e disponibile su GitHub. La web app è distribuibile tramite Streamlit
+        senza installazione lato utente.
+      </p>
+    </div>
+
+  </main>
+
+  <footer class="foot">
+    <p><a class="cs-footer-back" href="index.html">← Torna al portfolio</a></p>
+    <p>© 2025 asillaV — Automation & Data Analysis</p>
+  </footer>
+
+</body>
+</html>
