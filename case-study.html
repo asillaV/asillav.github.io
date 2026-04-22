@@ -5,302 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CSV Analyzer — Case Study | Francesco Vallisa</title>
   <meta name="description" content="Come ho costruito un tool che riduce l'analisi di CSV industriali da ore a minuti, senza codice. Case study reale con contesto, scelte progettuali, limiti e valore prodotto.">
-  <meta name="theme-color" content="#0e0e0e">
+  <meta name="theme-color" content="#0B0B0C">
 
-  <!-- Open Graph -->
   <meta property="og:title" content="CSV Analyzer — Case Study | Francesco Vallisa">
-  <meta property="og:description" content="Come ho costruito un tool che riduce l'analisi di CSV industriali da ore a minuti, senza codice. Case study reale con contesto, scelte progettuali, limiti e valore prodotto.">
+  <meta property="og:description" content="Come ho costruito un tool che riduce l'analisi di CSV industriali da ore a minuti, senza codice.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://asillav.github.io/case-study.html">
   <meta property="og:image" content="https://asillav.github.io/assets/logo.png">
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CSV Analyzer — Case Study | Francesco Vallisa">
-  <meta name="twitter:description" content="Come ho costruito un tool che riduce l'analisi di CSV industriali da ore a minuti, senza codice. Case study reale con contesto, scelte progettuali, limiti e valore prodotto.">
+  <meta name="twitter:description" content="Come ho costruito un tool che riduce l'analisi di CSV industriali da ore a minuti, senza codice.">
   <meta name="twitter:image" content="https://asillav.github.io/assets/logo.png">
 
-  <link rel="stylesheet" href="style.css" />
-
-  <style>
-    /* Case study specific layout */
-    .cs-header {
-      border-bottom: 1px solid var(--border);
-      padding: 2rem 1rem 2.2rem;
-      background: linear-gradient(180deg, rgba(63,169,245,0.06), transparent 60%);
-    }
-
-    .cs-nav {
-      max-width: 760px;
-      margin: 0 auto 1.6rem;
-    }
-
-    .cs-nav a {
-      font-size: .9rem;
-      color: var(--muted);
-    }
-
-    .cs-nav a:hover {
-      color: var(--fg);
-      text-decoration: none;
-    }
-
-    .cs-title {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .cs-title h1 {
-      font-size: 2rem;
-      margin: 0 0 .4rem;
-    }
-
-    .cs-subtitle {
-      color: var(--muted);
-      font-size: 1.05rem;
-      margin: 0 0 .8rem;
-    }
-
-    .cs-meta {
-      font-size: .85rem;
-      color: var(--muted);
-      margin: 0 0 1.2rem;
-      letter-spacing: .02em;
-    }
-
-    .cs-cta {
-      display: flex;
-      gap: .75rem;
-      flex-wrap: wrap;
-    }
-
-    /* Body layout */
-    .cs-body {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 1.25rem;
-    }
-
-    .cs-body section {
-      margin: 2.4rem 0;
-    }
-
-    .cs-body h2 {
-      font-size: 1.2rem;
-      margin: 0 0 .9rem;
-      color: var(--fg);
-    }
-
-    .cs-body h3 {
-      font-size: 1rem;
-      margin: 1.2rem 0 .5rem;
-      color: var(--fg);
-    }
-
-    .cs-body p {
-      margin: .5rem 0 .8rem;
-      color: #d8d8d8;
-    }
-
-    .cs-body ul, .cs-body ol {
-      margin: .4rem 0 .8rem;
-      padding-left: 1.3rem;
-      color: #d8d8d8;
-    }
-
-    .cs-body li {
-      margin: .3rem 0;
-    }
-
-    /* Workflow steps */
-    .workflow {
-      list-style: none;
-      padding: 0;
-      margin: .8rem 0;
-      position: relative;
-    }
-
-    .workflow::before {
-      content: '';
-      position: absolute;
-      left: 18px;
-      top: 28px;
-      bottom: 28px;
-      width: 2px;
-      background: var(--border);
-    }
-
-    .workflow-step {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      padding: .65rem 0;
-      position: relative;
-    }
-
-    .workflow-num {
-      flex-shrink: 0;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(63,169,245,.12);
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-weight: 700;
-      font-size: .95rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .workflow-content {
-      padding-top: .4rem;
-    }
-
-    .workflow-content strong {
-      display: block;
-      color: var(--fg);
-      font-size: .95rem;
-    }
-
-    .workflow-content span {
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
-    /* Callout */
-    .callout {
-      border-left: 3px solid var(--accent);
-      background: rgba(63,169,245,.05);
-      border-radius: 0 10px 10px 0;
-      padding: 1.1rem 1.3rem;
-      margin: .6rem 0 1rem;
-    }
-
-    .callout-title {
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--fg);
-      margin: 0 0 .6rem;
-    }
-
-    .callout p {
-      margin: 0 0 .6rem;
-    }
-
-    .callout ul {
-      margin: .3rem 0 0;
-    }
-
-    /* Warning list */
-    .warn-list {
-      list-style: none;
-      padding: 0;
-      margin: .4rem 0 .8rem;
-      color: #d8d8d8;
-    }
-
-    .warn-list li {
-      padding: .25rem 0 .25rem 1.8rem;
-      position: relative;
-      margin: .3rem 0;
-    }
-
-    .warn-list li::before {
-      content: '⚠';
-      position: absolute;
-      left: 0;
-      top: .25rem;
-      font-size: .85rem;
-      color: #e8b64a;
-    }
-
-    /* Evolution list */
-    .evol-list {
-      list-style: none;
-      padding: 0;
-      margin: .4rem 0 .8rem;
-      counter-reset: evol;
-    }
-
-    .evol-list li {
-      display: flex;
-      gap: .9rem;
-      align-items: flex-start;
-      padding: .5rem 0;
-      color: #d8d8d8;
-      counter-increment: evol;
-    }
-
-    .evol-list li::before {
-      content: counter(evol);
-      flex-shrink: 0;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: rgba(63,169,245,.12);
-      border: 1px solid rgba(63,169,245,.4);
-      color: var(--accent);
-      font-weight: 700;
-      font-size: .82rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: .1rem;
-    }
-
-    /* Note section */
-    .cs-note {
-      border-top: 1px solid var(--border);
-      margin-top: 3rem;
-      padding-top: 1.4rem;
-    }
-
-    .cs-note p {
-      font-size: .875rem;
-      color: var(--muted);
-      margin: .3rem 0;
-    }
-
-    .cs-note .note-label {
-      font-size: .78rem;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: #555;
-      margin-bottom: .4rem;
-    }
-
-    /* Footer back link */
-    .cs-footer-back {
-      display: inline-flex;
-      align-items: center;
-      gap: .3rem;
-      font-size: .9rem;
-      margin-bottom: .5rem;
-    }
-
-    @media (max-width: 720px) {
-      .cs-title h1 { font-size: 1.55rem; }
-      .workflow::before { left: 15px; }
-      .workflow-num { width: 32px; height: 32px; font-size: .85rem; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css?v=2" />
 </head>
 <body>
 
   <header class="cs-header">
-    <div class="cs-nav">
-      <a href="index.html">← Portfolio</a>
-    </div>
-    <div class="cs-title">
-      <h1>CSV Analyzer</h1>
-      <p class="cs-subtitle">Case study — come un tool ha eliminato la frizione nell'analisi di dati industriali</p>
-      <p class="cs-meta">Industria · Diagnostica · Python · Signal Processing</p>
-      <div class="cs-cta">
-        <a class="btn primary" href="https://asillav-csv-analyzer.streamlit.app" target="_blank" rel="noopener">Prova la demo</a>
-        <a class="btn" href="https://github.com/asillaV/csv-analyzer" target="_blank" rel="noopener">Repository</a>
+    <div class="cs-header-inner">
+      <div class="cs-nav">
+        <a href="index.html">← Portfolio</a>
+      </div>
+      <div class="cs-title">
+        <span class="eyebrow">Case study</span>
+        <h1>CSV Analyzer</h1>
+        <p class="cs-subtitle">Come un tool ha eliminato la frizione nell'analisi di dati industriali.</p>
+        <p class="cs-meta">Industria · Diagnostica · Python · Signal Processing</p>
+        <div class="cs-cta">
+          <a class="btn primary" href="https://asillav-csv-analyzer.streamlit.app" target="_blank" rel="noopener">Prova la demo <span aria-hidden="true" style="font-family:var(--font-mono)">→</span></a>
+          <a class="btn" href="https://github.com/asillaV/csv-analyzer" target="_blank" rel="noopener">Repository</a>
+        </div>
       </div>
     </div>
   </header>
@@ -308,7 +46,8 @@
   <main class="cs-body">
 
     <section id="il-problema">
-      <h2>1. Il problema</h2>
+      <span class="cs-num">01</span>
+      <h2>Il problema</h2>
       <p>
         Nel lavoro quotidiano con sistemi di acquisizione dati, i file prodotti dai sensori — accelerometri,
         celle di carico, potenziometri — arrivano in formato binario e vengono convertiti in CSV tramite
@@ -339,7 +78,8 @@
     </section>
 
     <section id="l-obiettivo">
-      <h2>2. L'obiettivo</h2>
+      <span class="cs-num">02</span>
+      <h2>L'obiettivo</h2>
       <p>
         L'obiettivo era costruire uno strumento che un ingegnere tecnico — non necessariamente un programmatore —
         potesse usare immediatamente su qualsiasi CSV, indipendentemente da come era strutturato.
@@ -360,7 +100,8 @@
     </section>
 
     <section id="la-soluzione">
-      <h2>3. La soluzione</h2>
+      <span class="cs-num">03</span>
+      <h2>La soluzione</h2>
       <p>
         Analizzatore CSV è una dashboard multi-piattaforma per l'analisi di segnali in file CSV.
       </p>
@@ -384,7 +125,8 @@
     </section>
 
     <section id="le-scelte-progettuali">
-      <h2>4. Le scelte progettuali</h2>
+      <span class="cs-num">04</span>
+      <h2>Le scelte progettuali</h2>
 
       <h3>Architettura modulare: core separato dall'UI</h3>
       <p>
@@ -429,53 +171,54 @@
     </section>
 
     <section id="il-workflow">
-      <h2>5. Il workflow</h2>
+      <span class="cs-num">05</span>
+      <h2>Il workflow</h2>
       <p>Il flusso tipico di una sessione di analisi:</p>
       <ol class="workflow" role="list">
         <li class="workflow-step">
-          <div class="workflow-num" aria-hidden="true">1</div>
+          <div class="workflow-num">01</div>
           <div class="workflow-content">
             <strong>Caricamento</strong>
             <span>Drag and drop del CSV nell'interfaccia web, o selezione file nel desktop.</span>
           </div>
         </li>
         <li class="workflow-step">
-          <div class="workflow-num" aria-hidden="true">2</div>
+          <div class="workflow-num">02</div>
           <div class="workflow-content">
             <strong>Lettura automatica</strong>
             <span>Il software rileva encoding, delimitatore, header, formato numerico.</span>
           </div>
         </li>
         <li class="workflow-step">
-          <div class="workflow-num" aria-hidden="true">3</div>
+          <div class="workflow-num">03</div>
           <div class="workflow-content">
             <strong>Quality check</strong>
             <span>Eventuali avvisi su anomalie nei dati (non bloccanti).</span>
           </div>
         </li>
         <li class="workflow-step">
-          <div class="workflow-num" aria-hidden="true">4</div>
+          <div class="workflow-num">04</div>
           <div class="workflow-content">
             <strong>Selezione assi</strong>
             <span>L'utente sceglie l'asse X (temporale o numerico) e i segnali Y da visualizzare.</span>
           </div>
         </li>
         <li class="workflow-step">
-          <div class="workflow-num" aria-hidden="true">5</div>
+          <div class="workflow-num">05</div>
           <div class="workflow-content">
             <strong>Visualizzazione</strong>
             <span>Plot sovrapposti o separati, interattivi.</span>
           </div>
         </li>
         <li class="workflow-step">
-          <div class="workflow-num" aria-hidden="true">6</div>
+          <div class="workflow-num">06</div>
           <div class="workflow-content">
             <strong>Analisi</strong>
             <span>FFT, filtri (Moving Average, Butterworth LP/HP/BP), statistiche per sezione.</span>
           </div>
         </li>
         <li class="workflow-step">
-          <div class="workflow-num" aria-hidden="true">7</div>
+          <div class="workflow-num">07</div>
           <div class="workflow-content">
             <strong>Export</strong>
             <span>Plot scaricabili, report HTML interattivi, report visivi in PNG/PDF.</span>
@@ -489,9 +232,11 @@
     </section>
 
     <section id="il-valore-prodotto">
-      <h2>6. Il valore prodotto</h2>
+      <span class="cs-num">06</span>
+      <h2>Il valore prodotto</h2>
 
       <div class="callout">
+        <span class="callout-label">Caso reale</span>
         <p class="callout-title">Analisi in tempo reale durante una call con un cliente</p>
         <p>
           Un caso concreto: durante una call tecnica, un cliente sosteneva che il sistema avesse problemi nel
@@ -535,14 +280,15 @@
     </section>
 
     <section id="i-limiti-attuali">
-      <h2>7. I limiti attuali</h2>
+      <span class="cs-num">07</span>
+      <h2>I limiti attuali</h2>
       <p>Questi sono i limiti reali che un utente deve conoscere prima di adottare il software:</p>
       <ul class="warn-list">
-        <li><strong>Un solo CSV alla volta</strong>: non è possibile caricare e confrontare più file contemporaneamente nella stessa sessione</li>
-        <li><strong>Nessuna operazione tra dataset</strong>: non si possono combinare, sottrarre o trasformare serie provenienti da file diversi</li>
-        <li><strong>Limite di upload sulla versione cloud</strong>: sulla versione Streamlit Cloud, il limite di upload è circa 200 MB per file</li>
-        <li><strong>Prima lettura lenta su file grandi</strong>: la fase di caricamento e raffinazione può richiedere tempo su dataset pesanti; una volta completata, l'elaborazione è veloce</li>
-        <li><strong>Preset ancora sperimentali</strong>: il sistema funziona, ma ha ancora margini di stabilizzazione</li>
+        <li><strong>Un solo CSV alla volta</strong> — non è possibile caricare e confrontare più file contemporaneamente nella stessa sessione</li>
+        <li><strong>Nessuna operazione tra dataset</strong> — non si possono combinare, sottrarre o trasformare serie provenienti da file diversi</li>
+        <li><strong>Limite di upload sulla versione cloud</strong> — sulla versione Streamlit Cloud, il limite di upload è circa 200 MB per file</li>
+        <li><strong>Prima lettura lenta su file grandi</strong> — la fase di caricamento e raffinazione può richiedere tempo su dataset pesanti; una volta completata, l'elaborazione è veloce</li>
+        <li><strong>Preset ancora sperimentali</strong> — il sistema funziona, ma ha ancora margini di stabilizzazione</li>
       </ul>
       <p>
         Per analisi che richiedono confronto tra commesse diverse o operazioni complesse tra serie, rimane
@@ -551,12 +297,13 @@
     </section>
 
     <section id="evoluzioni-possibili">
-      <h2>8. Evoluzioni possibili</h2>
+      <span class="cs-num">08</span>
+      <h2>Evoluzioni possibili</h2>
       <p>Le priorità di sviluppo emerse dall'uso reale:</p>
       <ol class="evol-list">
-        <li><strong>Velocità della prima lettura</strong> — la fase di caricamento e raffinazione è il collo di bottiglia principale; c'è margine significativo di miglioramento</li>
-        <li><strong>Lettura di più CSV contemporaneamente</strong> — permetterebbe di confrontare dataset diversi nello stesso flusso di lavoro, che è uno dei casi d'uso più richiesti</li>
-        <li><strong>Operazioni tra serie</strong> — combinare, confrontare o trasformare segnali direttamente dentro il tool, senza passare a codice esterno</li>
+        <li><div><strong>Velocità della prima lettura</strong><br>La fase di caricamento e raffinazione è il collo di bottiglia principale; c'è margine significativo di miglioramento.</div></li>
+        <li><div><strong>Lettura di più CSV contemporaneamente</strong><br>Permetterebbe di confrontare dataset diversi nello stesso flusso di lavoro, uno dei casi d'uso più richiesti.</div></li>
+        <li><div><strong>Operazioni tra serie</strong><br>Combinare, confrontare o trasformare segnali direttamente dentro il tool, senza passare a codice esterno.</div></li>
       </ol>
       <p>
         In parallelo: stabilizzazione del sistema di preset e risoluzione di bug noti nel comportamento del
@@ -580,8 +327,10 @@
   </main>
 
   <footer class="foot">
-    <p><a class="cs-footer-back" href="index.html">← Torna al portfolio</a></p>
-    <p>© 2026 asillaV — Automation & Data Analysis</p>
+    <div class="foot-inner">
+      <a class="foot-back" href="index.html">← Torna al portfolio</a>
+      <span>© 2026 asillaV — Automation &amp; Data Analysis</span>
+    </div>
   </footer>
 
 </body>

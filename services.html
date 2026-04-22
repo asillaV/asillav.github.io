@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Services & Pricing — Francesco Vallisa | Python Automation for Manufacturing</title>
   <meta name="description" content="Packages and pricing for Python automation and data tools. Pilot, spot automation, full projects for manufacturing and industrial SMBs.">
-  <meta name="theme-color" content="#0e0e0e">
+  <meta name="theme-color" content="#0B0B0C">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Services & Pricing — Francesco Vallisa | Python Automation for Manufacturing">
@@ -20,296 +20,24 @@
   <meta name="twitter:description" content="Packages and pricing for Python automation and data tools. Pilot, spot automation, full projects for manufacturing and industrial SMBs.">
   <meta name="twitter:image" content="https://asillav.github.io/assets/logo.png">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="style.css" />
-
-  <style>
-    /* Page header */
-    .sv-header {
-      border-bottom: 1px solid var(--border);
-      padding: 2rem 1rem 2.2rem;
-      background: linear-gradient(180deg, rgba(63,169,245,0.06), transparent 60%);
-    }
-
-    .sv-nav {
-      max-width: 860px;
-      margin: 0 auto 1.6rem;
-    }
-
-    .sv-nav a {
-      font-size: .9rem;
-      color: var(--muted);
-    }
-
-    .sv-nav a:hover {
-      color: var(--fg);
-      text-decoration: none;
-    }
-
-    .sv-title {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .sv-title h1 {
-      font-size: 2rem;
-      margin: 0 0 .4rem;
-    }
-
-    .sv-subtitle {
-      color: var(--muted);
-      font-size: 1.05rem;
-      margin: 0 0 .8rem;
-      max-width: 640px;
-    }
-
-    .sv-meta {
-      font-size: .85rem;
-      color: var(--muted);
-      margin: 0;
-      letter-spacing: .02em;
-    }
-
-    /* Body layout */
-    .sv-body {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 1.25rem;
-    }
-
-    .sv-body section {
-      margin: 2.8rem 0;
-    }
-
-    .sv-body h2 {
-      font-size: 1.2rem;
-      margin: 0 0 1.1rem;
-      color: var(--fg);
-    }
-
-    /* Callout box */
-    .callout {
-      border-left: 3px solid var(--accent);
-      background: rgba(63,169,245,.05);
-      border-radius: 0 10px 10px 0;
-      padding: 1.2rem 1.4rem;
-      margin: 0;
-    }
-
-    .callout-title {
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--fg);
-      margin: 0 0 .7rem;
-    }
-
-    .callout p {
-      margin: 0 0 .8rem;
-      color: #d8d8d8;
-      font-size: .95rem;
-    }
-
-    .callout p:last-of-type {
-      margin-bottom: 1rem;
-    }
-
-    /* Pricing cards grid */
-    .pkg-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-      align-items: start;
-    }
-
-    .pkg-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .pkg-card.featured {
-      border-color: var(--accent);
-      position: relative;
-    }
-
-    .pkg-badge {
-      position: absolute;
-      top: -1px;
-      right: 1.2rem;
-      background: var(--accent);
-      color: #0e0e0e;
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: .22rem .65rem;
-      border-radius: 0 0 6px 6px;
-    }
-
-    .pkg-header {
-      padding: 1.4rem 1.4rem 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .pkg-name {
-      font-size: .8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--muted);
-      margin: 0 0 .5rem;
-    }
-
-    .pkg-price {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--fg);
-      margin: 0 0 .2rem;
-      line-height: 1.1;
-    }
-
-    .pkg-duration {
-      font-size: .82rem;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .pkg-body {
-      padding: 1.2rem 1.4rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .pkg-quote {
-      font-style: italic;
-      color: var(--muted);
-      font-size: .9rem;
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    .pkg-section-label {
-      font-size: .75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      color: var(--accent);
-      margin: 0 0 .4rem;
-    }
-
-    .pkg-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .pkg-list li {
-      padding: .28rem 0 .28rem 1.3rem;
-      position: relative;
-      font-size: .88rem;
-      color: #d8d8d8;
-      line-height: 1.45;
-    }
-
-    .pkg-list li::before {
-      content: '–';
-      position: absolute;
-      left: 0;
-      color: var(--muted);
-    }
-
-    .pkg-for {
-      font-size: .88rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    .pkg-cta {
-      padding: 0 1.4rem 1.4rem;
-    }
-
-    .pkg-cta .btn {
-      display: block;
-      text-align: center;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    /* Operative notes */
-    .op-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .op-list li {
-      padding: .55rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: .9rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .op-list li:last-child {
-      border-bottom: none;
-    }
-
-    .op-list strong {
-      color: #c0c0c0;
-    }
-
-    /* Final CTA box */
-    .sv-final-cta {
-      text-align: center;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem 1.5rem;
-    }
-
-    .sv-final-cta p {
-      color: #d8d8d8;
-      font-size: .98rem;
-      max-width: 480px;
-      margin: 0 auto 1.2rem;
-      line-height: 1.6;
-    }
-
-    /* Footer back link */
-    .sv-footer-back {
-      display: inline-flex;
-      align-items: center;
-      gap: .3rem;
-      font-size: .9rem;
-      margin-bottom: .5rem;
-    }
-
-    @media (max-width: 720px) {
-      .sv-title h1 { font-size: 1.55rem; }
-      .pkg-grid {
-        grid-template-columns: 1fr;
-      }
-      .pkg-card.featured {
-        order: -1;
-      }
-    }
-  </style>
 </head>
 <body>
 
   <header class="sv-header">
-    <div class="sv-nav">
-      <a href="index.html" aria-label="Torna al portfolio">← Portfolio</a>
-    </div>
-    <div class="sv-title">
-      <h1>Services &amp; Pricing</h1>
-      <p class="sv-subtitle">Pacchetti chiari, prezzi trasparenti, scope definito. Per PMI manifatturiere e industriali che vogliono automatizzare processi o trasformare dati di test in decisioni.</p>
-      <p class="sv-meta">Python · Automation · Signal Processing · Dashboards</p>
+    <div class="sv-header-inner">
+      <div class="sv-nav">
+        <a href="index.html" aria-label="Torna al portfolio">← Portfolio</a>
+      </div>
+      <div class="sv-title">
+        <span class="eyebrow">Services &amp; Pricing</span>
+        <h1>Pacchetti chiari, scope definito, prezzi trasparenti.</h1>
+        <p class="sv-subtitle">Per PMI manifatturiere e industriali che vogliono automatizzare processi o trasformare dati di test in decisioni.</p>
+        <p class="sv-meta">Python · Automation · Signal Processing · Dashboards</p>
+      </div>
     </div>
   </header>
 
@@ -318,33 +46,35 @@
     <!-- SECTION 1: Call conoscitiva -->
     <section id="call-conoscitiva">
       <div class="callout">
+        <span class="callout-label">Step 00 — Discovery</span>
         <p class="callout-title">Prima di tutto: call conoscitiva gratuita</p>
         <p>
           Prima di ogni pacchetto c'è una call di 30 minuti, gratuita, senza impegno. Mi racconti il problema,
           io ti dico se posso aiutarti, con quale pacchetto e in quanto tempo. Se non è il mio campo, te lo
           dico onestamente.
         </p>
-        <a class="btn primary" href="contact.html" aria-label="Richiedi una call conoscitiva">Richiedi una call</a>
+        <a class="btn primary" href="contact.html" aria-label="Richiedi una call conoscitiva">Richiedi una call <span aria-hidden="true" style="font-family:var(--font-mono)">→</span></a>
       </div>
     </section>
 
     <!-- SECTION 2: I pacchetti -->
     <section id="pacchetti">
+      <span class="eyebrow">Packages</span>
       <h2>I pacchetti</h2>
       <div class="pkg-grid">
 
         <!-- Pacchetto 1: Pilot -->
         <article class="pkg-card">
           <div class="pkg-header">
-            <p class="pkg-name">Pacchetto 1</p>
+            <p class="pkg-name">01 — Pilot</p>
             <p class="pkg-price">da €700</p>
-            <p class="pkg-duration">Pilot · 2 giorni</p>
+            <p class="pkg-duration">2 giorni</p>
           </div>
           <div class="pkg-body">
             <p class="pkg-quote">Prima di impegnarti su un progetto grande, prendiamo 2 giorni e costruisco un prototipo funzionante su un pezzo del tuo problema. Se funziona, proseguiamo insieme. Se no, hai comunque un output tecnico che puoi usare.</p>
 
             <div>
-              <p class="pkg-section-label">Cosa include</p>
+              <span class="pkg-section-label">Cosa include</span>
               <ul class="pkg-list">
                 <li>Pilot funzionante su una parte delimitata del tuo problema (script, parser, mini-dashboard, PoC)</li>
                 <li>Documento tecnico con osservazioni sui dati/processo reali</li>
@@ -354,12 +84,12 @@
             </div>
 
             <div>
-              <p class="pkg-section-label">Per chi è</p>
+              <span class="pkg-section-label">Per chi è</span>
               <p class="pkg-for">Aziende che vogliono capire se un'automazione ha senso sul loro caso reale, prima di investire su un progetto più grande. È il modo più economico per ridurre il rischio.</p>
             </div>
           </div>
           <div class="pkg-cta">
-            <a class="btn primary" href="contact.html?package=pilot" aria-label="Richiedi informazioni sul pacchetto Pilot">Richiedi informazioni</a>
+            <a class="btn" href="contact.html?package=pilot" aria-label="Richiedi informazioni sul pacchetto Pilot">Richiedi informazioni</a>
           </div>
         </article>
 
@@ -367,15 +97,15 @@
         <article class="pkg-card featured">
           <span class="pkg-badge">Most common</span>
           <div class="pkg-header">
-            <p class="pkg-name">Pacchetto 2</p>
+            <p class="pkg-name">02 — Automazione spot</p>
             <p class="pkg-price">da €2.100</p>
-            <p class="pkg-duration">Automazione spot · 1–3 settimane</p>
+            <p class="pkg-duration">1–3 settimane</p>
           </div>
           <div class="pkg-body">
             <p class="pkg-quote">Un problema specifico, uno strumento dedicato, zero dipendenze da codice che nessuno in azienda sa leggere.</p>
 
             <div>
-              <p class="pkg-section-label">Cosa include</p>
+              <span class="pkg-section-label">Cosa include</span>
               <ul class="pkg-list">
                 <li>Automazione di un processo o build di un tool specifico (report, parser, dashboard, pipeline dati)</li>
                 <li>Codice documentato, consegnato e installato</li>
@@ -385,7 +115,7 @@
             </div>
 
             <div>
-              <p class="pkg-section-label">Esempi tipici</p>
+              <span class="pkg-section-label">Esempi tipici</span>
               <ul class="pkg-list">
                 <li>Automazione report settimanale da gestionale</li>
                 <li>Dashboard di monitoraggio per dati di collaudo</li>
@@ -395,7 +125,7 @@
             </div>
 
             <div>
-              <p class="pkg-section-label">Per chi è</p>
+              <span class="pkg-section-label">Per chi è</span>
               <p class="pkg-for">Aziende che hanno già un problema definito e vogliono una soluzione specifica, senza avviare un progetto da reparto IT.</p>
             </div>
           </div>
@@ -407,15 +137,15 @@
         <!-- Pacchetto 3: Progetto completo -->
         <article class="pkg-card">
           <div class="pkg-header">
-            <p class="pkg-name">Pacchetto 3</p>
+            <p class="pkg-name">03 — Progetto completo</p>
             <p class="pkg-price">da €7.000</p>
-            <p class="pkg-duration">Progetto completo · 4–8 settimane</p>
+            <p class="pkg-duration">4–8 settimane</p>
           </div>
           <div class="pkg-body">
             <p class="pkg-quote">Costruiamo insieme uno strumento su misura che entra nel tuo flusso di lavoro e ci resta.</p>
 
             <div>
-              <p class="pkg-section-label">Cosa include</p>
+              <span class="pkg-section-label">Cosa include</span>
               <ul class="pkg-list">
                 <li>Analisi iniziale del contesto e definizione scope</li>
                 <li>Sviluppo completo in 3 milestone (M1 30% · M2 40% · M3 30%)</li>
@@ -426,7 +156,7 @@
             </div>
 
             <div>
-              <p class="pkg-section-label">Esempi tipici</p>
+              <span class="pkg-section-label">Esempi tipici</span>
               <ul class="pkg-list">
                 <li>Sistema di acquisizione dati da sensori multipli</li>
                 <li>Piattaforma di analisi segnali interna</li>
@@ -436,12 +166,12 @@
             </div>
 
             <div>
-              <p class="pkg-section-label">Per chi è</p>
+              <span class="pkg-section-label">Per chi è</span>
               <p class="pkg-for">Aziende che hanno bisogno di uno strumento tecnico ad hoc che non esiste sul mercato e che sostituisce mesi di lavoro manuale o di script sparsi.</p>
             </div>
           </div>
           <div class="pkg-cta">
-            <a class="btn primary" href="contact.html?package=progetto" aria-label="Richiedi informazioni sul pacchetto Progetto completo">Richiedi informazioni</a>
+            <a class="btn" href="contact.html?package=progetto" aria-label="Richiedi informazioni sul pacchetto Progetto completo">Richiedi informazioni</a>
           </div>
         </article>
 
@@ -450,28 +180,32 @@
 
     <!-- SECTION 3: Note operative -->
     <section id="note-operative">
+      <span class="eyebrow">Terms</span>
       <h2>Note operative</h2>
       <ul class="op-list">
-        <li><strong>Prezzi IVA esclusa</strong> — regime forfettario, nessuna IVA applicata</li>
-        <li><strong>Pagamento a milestone</strong> per progetti oltre €2.500</li>
-        <li><strong>Ambito di lavoro:</strong> full remote, meeting via call</li>
-        <li><strong>Garanzia:</strong> se in corso d'opera capiamo che lo scope non torna, lo rivediamo insieme</li>
+        <li><strong>Prezzi</strong><span>IVA esclusa — regime forfettario, nessuna IVA applicata</span></li>
+        <li><strong>Pagamento</strong><span>A milestone per progetti oltre €2.500</span></li>
+        <li><strong>Ambito di lavoro</strong><span>Full remote, meeting via call</span></li>
+        <li><strong>Garanzia</strong><span>Se in corso d'opera capiamo che lo scope non torna, lo rivediamo insieme</span></li>
       </ul>
     </section>
 
     <!-- SECTION 4: CTA finale -->
     <section id="cta-finale">
       <div class="sv-final-cta">
+        <span class="eyebrow">Next step</span>
         <p>Hai un problema in mente ma non sei sicuro quale pacchetto fa per te? Scrivimi due righe, capiamo insieme.</p>
-        <a class="btn primary" href="contact.html" aria-label="Scrivimi per capire qual è il pacchetto giusto">Scrivimi</a>
+        <a class="btn primary" href="contact.html" aria-label="Scrivimi per capire qual è il pacchetto giusto">Scrivimi <span aria-hidden="true" style="font-family:var(--font-mono)">→</span></a>
       </div>
     </section>
 
   </main>
 
   <footer class="foot">
-    <p><a class="sv-footer-back" href="index.html" aria-label="Torna al portfolio">← Torna al portfolio</a></p>
-    <p>© 2026 asillaV — Automation &amp; Data Analysis</p>
+    <div class="foot-inner">
+      <a class="foot-back" href="index.html" aria-label="Torna al portfolio">← Torna al portfolio</a>
+      <span>© 2026 asillaV — Automation &amp; Data Analysis</span>
+    </div>
   </footer>
 
 </body>
