@@ -1,11 +1,12 @@
-# asillav.github.io — Automation & Data Portfolio
+# asillav.github.io — Data & Signal Processing Portfolio
 
-A single-page portfolio that showcases Francesco Vallisa’s automation and data projects. The site focuses on clear messaging, lightweight assets, and fast load times so prospects can quickly grasp expertise in Python tooling, industrial data workflows, and rapid prototyping. It ships with a dedicated CV page (`cv.html`) for long-form experience details.
+Personal technical portfolio of Francesco Vallisa, Data & Signal Processing Engineer. It presents selected projects on industrial and sensor data — Python tooling, signal processing, data pipelines and dashboards — with a long-form CV (`cv.html`) and a detailed case study (`case-study.html`). The site stays lightweight and fast: plain HTML/CSS, no build step.
 
 ## Project Layout
-- `index.html` — Landing page with hero, services, featured projects, process, and contact sections.
-- `cv.html` — Standalone résumé with bilingual content, project grid, and skills matrix.
-- `style.css` — Global theme, layout primitives, and responsive rules for both pages.
+- `index.html` — Landing page with hero, background, projects, process, and contact sections.
+- `cv.html` — Standalone résumé with bilingual content (IT/EN), project grid, and skills matrix.
+- `case-study.html` — CSV Analyzer case study (source text in `case-study.md`).
+- `style.css` — Global theme, layout primitives, and responsive rules for all pages.
 - `assets/` — Logos, screenshots, and other static media referenced by the pages.
 
 ## Getting Started
@@ -16,10 +17,10 @@ python3 -m http.server 8000
 Open the URL in your browser to iterate on copy, layout, or assets. For a Node-based preview you can also run `npx serve .`.
 
 ## Customization
-- Update hero text, service bullets, and project cards directly in `index.html`.
+- Update hero text and project cards directly in `index.html`.
 - Adjust typography, color tokens, or grid breakpoints in `style.css`.
-- Keep new assets optimized (WebP/PNG ≤1 MB) before placing them in `assets/`.
-- Portfolio and CV share classes—test both pages after editing shared styles.
+- Keep new assets optimized (WebP/PNG ≤1 MB) before placing them in `assets/`.
+- All pages share `style.css` — test each page after editing shared styles.
 
 ## Deployment
 The repository is configured for GitHub Pages:
